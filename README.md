@@ -1,8 +1,8 @@
-# circRNA bladder cancer — machine learning pipeline
+# circRNA bladder cancer: machine learning pipeline
 
 Reproducible, leakage-free machine learning analyses accompanying the manuscript
-**"Non-Invasive Bladder Cancer Diagnosis and Risk Stratification via Urinary
-circRNA Signatures and Supervised Machine Learning"**.
+**"Urinary circRNA Signatures for Non-Invasive Bladder Cancer Diagnosis: An
+Exploratory Machine Learning Study"**.
 
 The manuscript's machine learning sections (Methods: *Predictive Modeling of
 Clinical Outcomes Using circRNA Expression Profiles*; Results 3.5; Figures 4–5)
@@ -12,7 +12,7 @@ including the mutual-information feature selector.
 
 ## Scripts
 
-- **`run_analysis.py`** — Main pipeline. KNN imputation (k = 5),
+- **`run_analysis.py`**: Main pipeline. KNN imputation (k = 5),
   standardization, and mutual-information feature selection (top 7) are fitted
   *inside* each cross-validation fold to prevent data leakage. Classifiers:
   logistic regression, random forest (300 trees), RBF-kernel SVM, and XGBoost
@@ -21,17 +21,17 @@ including the mutual-information feature selector.
   cross-validation (ROC AUC, accuracy, F1). Permutation-based feature
   importance (50 permutations) for the best model. Exploratory three-tier EAU
   risk classification among cancer cases (LOOCV, hypothesis-generating).
-- **`run_advanced_analysis.py`** — Elastic-net logistic regression with
+- **`run_advanced_analysis.py`**: Elastic-net logistic regression with
   hyperparameters (C, L1 ratio) selected by nested LOOCV; bootstrap 95 %
   confidence interval (5000 resamples) for the LOOCV AUC; sample-size
   projection for a follow-up study (AUC → Cohen's d, 80 % power, α = 0.05).
-- **`run_permutation_test.py`** — Label-shuffling permutation test (1000
+- **`run_permutation_test.py`**: Label-shuffling permutation test (1000
   shuffles) for the random forest and XGBoost pipelines; empirical p-value
   with the +1 correction (Davison & Hinkley 1997). Runs in parallel across all
   CPU cores (~40 min on 20 cores).
-- **`run_stability_selection.py`** — Bootstrap stability selection
+- **`run_stability_selection.py`**: Bootstrap stability selection
   (Meinshausen & Bühlmann 2010): 1000 stratified bootstrap resamples with two
-  independent selectors — elastic-net non-zero coefficients and random forest
+  independent selectors: elastic-net non-zero coefficients and random forest
   top-7 by importance.
 
 ## Requirements
